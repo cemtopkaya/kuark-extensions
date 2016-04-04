@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -51,12 +51,12 @@
     "postpublish": "",
     "_______________________________________________________________ UPDATE KUARK PACKAGES": "__________",
     "update:all": "npm run update-kuark-api && npm run update-kuark-batch && npm run update-kuark-db && npm run update-kuark-extensions && npm run update-kuark-istisna && npm run update-kuark-schema",
-    "update-kuark-api": "ncu /^kuark-/ -u --packageFile ../kuark-api/package.json -f kuark-extensions ",
-    "update-kuark-batch": "ncu /^kuark-/ -u --packageFile ../kuark-batch/package.json -f kuark-extensions ",
-    "update-kuark-db": "ncu /^kuark-/ -u --packageFile ../kuark-db/package.json -f kuark-extensions ",
-    "update-kuark-extensions": "ncu /^kuark-/ -u --packageFile ../kuark-extensions/package.json -f kuark-extensions ",
-    "update-kuark-istisna": "ncu /^kuark-/ -u --packageFile ../kuark-istisna/package.json -f kuark-extensions ",
-    "update-kuark-schema": "ncu /^kuark-/ -u --packageFile ../kuark-schema/package.json -f kuark-extensions "
+    "update-kuark-api": "ncu -f kuark-extensions -u --packageFile ../kuark-api/package.json ",
+    "update-kuark-batch": "ncu -f kuark-extensions -u --packageFile ../kuark-batch/package.json ",
+    "update-kuark-db": "ncu -f kuark-extensions -u --packageFile ../kuark-db/package.json ",
+    "update-kuark-extensions": "ncu -f kuark-extensions -u --packageFile ../kuark-extensions/package.json ",
+    "update-kuark-istisna": "ncu -f kuark-extensions -u --packageFile ../kuark-istisna/package.json ",
+    "update-kuark-schema": "ncu -f kuark-extensions -u --packageFile ../kuark-schema/package.json "
   },
   "repository": {
     "type": "git",
