@@ -6,7 +6,7 @@ function Extensions() {
         return result;
     }
 
-    Object.defineProperty(result, '__stack', {
+    Object.defineProperty(global, '__stack', {
         get: function () {
             var orig = Error.prepareStackTrace;
             Error.prepareStackTrace = function (_, stack) {
@@ -19,19 +19,19 @@ function Extensions() {
         }
     });
 
-    Object.defineProperty(result, '__line', {
+    Object.defineProperty(global, '__line', {
         get: function () {
             return __stack[1].getLineNumber();
         }
     });
 
-    Object.defineProperty(result, '__function', {
+    Object.defineProperty(global, '__function', {
         get: function () {
             return __stack[1].getFunctionName();
         }
     });
 
-    Object.defineProperty(result, '__file', {
+    Object.defineProperty(global, '__file', {
         get: function () {
             return __stack[1].getFileName().split('/').slice(-1)[0];
         }
@@ -39,7 +39,7 @@ function Extensions() {
 
     result.counter = 0;
     //stacktostring FAIL
-    Object.defineProperty(result, 'ssr', {
+    Object.defineProperty(global, 'ssr', {
         get: function () {
             console.log("\033[041m******************************************" +
                 "\nFunction: " + __stack[1].getFunctionName() +
@@ -59,7 +59,7 @@ function Extensions() {
     });
 
     //stacktostring SUCCESS
-    Object.defineProperty(result, 'ssg', {
+    Object.defineProperty(global, 'ssg', {
         get: function () {
             console.log("\033[092m******************************************" +
                 "\nFunction: " + __stack[1].getFunctionName() +
