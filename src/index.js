@@ -2,11 +2,11 @@
 function Extensions() {
 
     var result = {};
-    if (result.hasOwnProperty('_stack')) {
+   /* if (result.hasOwnProperty('_stack')) {
         return result;
-    }
+    }*/
 
-    Object.defineProperty(global, '__stack', {
+    Object.defineProperty(result, '__stack', {
         get: function () {
             var orig = Error.prepareStackTrace;
             Error.prepareStackTrace = function (_, stack) {
@@ -19,60 +19,60 @@ function Extensions() {
         }
     });
 
-    Object.defineProperty(global, '__line', {
+    Object.defineProperty(result, '__line', {
         get: function () {
-            return __stack[1].getLineNumber();
+            return result.__stack[1].getLineNumber();
         }
     });
 
-    Object.defineProperty(global, '__function', {
+    Object.defineProperty(result, '__function', {
         get: function () {
-            return __stack[1].getFunctionName();
+            return result.__stack[1].getFunctionName();
         }
     });
 
-    Object.defineProperty(global, '__file', {
+    Object.defineProperty(result, '__file', {
         get: function () {
-            return __stack[1].getFileName().split('/').slice(-1)[0];
+            return result.__stack[1].getFileName().split('/').slice(-1)[0];
         }
     });
 
     result.counter = 0;
     //stacktostring FAIL
-    Object.defineProperty(global, 'ssr', {
+    Object.defineProperty(result, 'ssr', {
         get: function () {
             console.log("\033[041m******************************************" +
-                "\nFunction: " + __stack[1].getFunctionName() +
-                "\nFile\t: " + __stack[1].getFileName().split('/').slice(-1)[0] +
-                "\nLine\t: " + __stack[1].getLineNumber() +
+                "\nFunction: " + result.__stack[1].getFunctionName() +
+                "\nFile\t: " + result.__stack[1].getFileName().split('/').slice(-1)[0] +
+                "\nLine\t: " + result.__stack[1].getLineNumber() +
                 "\n******************************************\033[0m")
         },
         set: function (_params) {
 
             console.log("\033[041m******************************************" +
-                "\nFunction: " + __stack[1].getFunctionName() +
-                "\nFile\t: " + __stack[1].getFileName().split('/').slice(-1)[0] +
-                "\nLine\t: " + __stack[1].getLineNumber() + "\n" +
+                "\nFunction: " + result.__stack[1].getFunctionName() +
+                "\nFile\t: " + result.__stack[1].getFileName().split('/').slice(-1)[0] +
+                "\nLine\t: " + result.__stack[1].getLineNumber() + "\n" +
                 "\n Param\t: " + JSON.stringify(arguments, null, '  ') +
                 "\n******************************************\033[0m");
         }
     });
 
     //stacktostring SUCCESS
-    Object.defineProperty(global, 'ssg', {
+    Object.defineProperty(result, 'ssg', {
         get: function () {
             console.log("\033[092m******************************************" +
-                "\nFunction: " + __stack[1].getFunctionName() +
-                "\nFile\t: " + __stack[1].getFileName().split('/').slice(-1)[0] +
-                "\nLine\t: " + __stack[1].getLineNumber() +
+                "\nFunction: " + result.__stack[1].getFunctionName() +
+                "\nFile\t: " + result.__stack[1].getFileName().split('/').slice(-1)[0] +
+                "\nLine\t: " + result.__stack[1].getLineNumber() +
                 "\n******************************************\033[0m")
         },
         set: function (_params) {
             var simdi = new Date().getTime(),
                 meta1 = {
-                    "Function": __stack[1].getFunctionName(),
-                    "File": __stack[1].getFileName().split('/').slice(-1)[0],
-                    "Line": __stack[1].getLineNumber()
+                    "Function": result.__stack[1].getFunctionName(),
+                    "File": result.__stack[1].getFileName().split('/').slice(-1)[0],
+                    "Line": result.__stack[1].getLineNumber()
                 },
                 esMesaji = "http://127.0.0.1:9200/logs-" + moment().format("YYYY.MM.DD") + "/_search/?size=1000&q=message:" + simdi,
             /*ozet = "Function: " + __stack[1].getFunctionName() +
