@@ -17,6 +17,10 @@ describe('Uzantıların testi', function () {
         return true;
     });
 
+    it('__stack propertysi extension içinde tanımlı', function () {
+        return index.hasOwnProperty('__stack');
+    });
+
     it('Bugüne 1 gün ekleme', function () {
         var bugun = new Date(),
             eklenecekGun = 1,
