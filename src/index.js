@@ -164,7 +164,7 @@ function Extensions() {
      * @returns {Array}
      */
     Array.prototype.pluckX = function (_prop) {
-        return _.pluck(this, _prop);
+        return _.map(this, _prop);
     };
 
 
