@@ -2,12 +2,10 @@ var moment = require('moment'),
     Q = require('q'),
     _ = require('lodash');
 
-function Extensions() {
+var result = {};
+module.exports = result;
 
-    var result = {};
-    /* if (result.hasOwnProperty('_stack')) {
-     return result;
-     }*/
+function Extensions() {
 
     Object.defineProperty(result, '__stack', {
         get: function () {
@@ -90,7 +88,7 @@ function Extensions() {
                 meta1.Param = arguments;
             } else {
                 meta1.Param = esMesaji;
-                l.es(simdi, arguments);
+                console.log(simdi, arguments);
             }
 
             var consoleMesaji = "\033[9" + (++result.counter % 7) + "m******************************************\n" + JSON.stringify(meta1, null, 2) + "\n******************************************\033[0m";
@@ -556,4 +554,7 @@ function Extensions() {
     return result;
 }
 
-module.exports = Extensions();
+if(!result.hasOwnProperty("__stack")){
+    console.log("Estensions çalıştırılacak");
+    Extensions();
+}
