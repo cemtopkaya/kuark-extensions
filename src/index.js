@@ -413,7 +413,7 @@ function Extensions() {
      * @returns {Array}
      */
     Array.prototype.whereXU = function (_arananObje) {
-        return _.where(this, _arananObje);
+        return _.filter(this, _arananObje);
     };
 
     /**
