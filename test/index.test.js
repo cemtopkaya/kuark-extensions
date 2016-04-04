@@ -7,6 +7,16 @@ describe('Uzantıların testi', function () {
         expect('istisnai'.turkishToUpper()).to.equal('İSTİSNAİ');
     });
 
+    it('SSG ile başarılı mesajı göstermek', function () {
+        index.ssg = [{"deneme": {i:1}}];
+        return true;
+    });
+
+    it('SSR ile başarılı mesajı göstermek', function () {
+        index.ssr = [{"deneme": {i:1}}];
+        return true;
+    });
+
     it('Bugüne 1 gün ekleme', function () {
         var bugun = new Date(),
             eklenecekGun = 1,

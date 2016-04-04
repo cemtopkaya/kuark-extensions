@@ -1,4 +1,5 @@
-//region EXTENSIONS
+var moment=require('moment');
+
 function Extensions() {
 
     var result = {};
@@ -551,6 +552,5 @@ function Extensions() {
 
     return result;
 }
-//endregion
 
 module.exports = Extensions();
