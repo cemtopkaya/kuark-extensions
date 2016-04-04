@@ -1,11 +1,13 @@
-var moment=require('moment');
+var moment = require('moment'),
+    Q = require('q'),
+    _ = require('lodash');
 
 function Extensions() {
 
     var result = {};
-   /* if (result.hasOwnProperty('_stack')) {
-        return result;
-    }*/
+    /* if (result.hasOwnProperty('_stack')) {
+     return result;
+     }*/
 
     Object.defineProperty(result, '__stack', {
         get: function () {
@@ -15,7 +17,8 @@ function Extensions() {
             };
             var err = new Error;
             Error.captureStackTrace(err, arguments.callee);
-            var stack = err.stack;Error.prepareStackTrace = orig;
+            var stack = err.stack;
+            Error.prepareStackTrace = orig;
             return stack;
         }
     });
