@@ -7,6 +7,7 @@ module.exports = result;
 
 function Extensions() {
 
+    //region OBJECT
     Object.defineProperty(result, '__stack', {
         get: function () {
             var orig = Error.prepareStackTrace;
@@ -97,6 +98,10 @@ function Extensions() {
         }
     });
 
+    //endregion
+
+    //region STRING
+
     String.prototype.splitWithOptions = function (_seperator, _leaveFalsyElements) {
         var arr = this.split(_seperator);
         return _leaveFalsyElements
@@ -144,6 +149,70 @@ function Extensions() {
         });
         return string.toLowerCase();
     };
+
+
+    //endregion
+
+    //region Function
+
+    Function.prototype.thenX = function () {
+
+        //console.log("************* allX ************");
+        if (!Array.isArray(this)) {
+            l.e("allX fonksiyonu ancak bir dizi üstünde çalışır!");
+            throw "allX fonksiyonu ancak bir dizi üstünde çalışır!";
+        }
+
+
+        /**
+         * all.apply kullandığımızda herhangi bir promise null dönerse dizi olarak dönmüyor
+         * bu yüzden allResolved önerilmiş daha sonrada allSettled önerilmiş
+         */
+        //return Q.all.apply(null,this);
+        /*
+         https://github.com/kriskowal/q/issues/257
+         return Q.allSettled([rejectedWith5, fulfilledWith10]).spread(function (one, two) {
+         assert(one.state === "rejected");
+         assert(one.reason === 5);
+
+         assert(two.state === "fulfilled");
+         assert(two.value === 10);
+         });
+
+         */
+
+        return Q.allSettled(this)
+            .then(function (_replies) {
+                var arrReplies = _replies.map(function (_reply) {
+                    if (_reply.state == "rejected") {
+                        console.error("************* allX PROMISE REJECTED : ");
+                        console.error("Promise  STATE : %s", _reply.state);
+                        console.error("Promise  VALUE : %s", _reply.value);
+                        console.error("Promise REASON : %s", _reply.reason);
+                        console.error("------------- allX PROMISE REJECTED *************");
+                    }
+
+                    return _reply.value;
+                });
+
+                //l.i("************* allX THEN result : ");
+                //l.i("\t", JSON.stringify(arrReplies));
+
+                return arrReplies;
+            });
+
+        var sonucAllX = Q.allSettled(this);
+        return sonucAllX.then(function (_sonuclar) {
+            //ssg = [{"allX.then(function(sonuclar : ": _sonuclar}];
+            return _sonuclar.map(function (_sonuc) {
+                _sonuc.value;
+            });
+        });
+    };
+
+    //endregion
+
+    //region ARRAY
 
     /**
      * Underscoore ya da lodash deki map metodunu çağıran extended fonk.
@@ -240,60 +309,6 @@ function Extensions() {
 
                 return arrReplies;
             });
-    };
-    Function.prototype.thenX = function () {
-
-        //console.log("************* allX ************");
-        if (!Array.isArray(this)) {
-            l.e("allX fonksiyonu ancak bir dizi üstünde çalışır!");
-            throw "allX fonksiyonu ancak bir dizi üstünde çalışır!";
-        }
-
-
-        /**
-         * all.apply kullandığımızda herhangi bir promise null dönerse dizi olarak dönmüyor
-         * bu yüzden allResolved önerilmiş daha sonrada allSettled önerilmiş
-         */
-        //return Q.all.apply(null,this);
-        /*
-         https://github.com/kriskowal/q/issues/257
-         return Q.allSettled([rejectedWith5, fulfilledWith10]).spread(function (one, two) {
-         assert(one.state === "rejected");
-         assert(one.reason === 5);
-
-         assert(two.state === "fulfilled");
-         assert(two.value === 10);
-         });
-
-         */
-
-        return Q.allSettled(this)
-            .then(function (_replies) {
-                var arrReplies = _replies.map(function (_reply) {
-                    if (_reply.state == "rejected") {
-                        console.error("************* allX PROMISE REJECTED : ");
-                        console.error("Promise  STATE : %s", _reply.state);
-                        console.error("Promise  VALUE : %s", _reply.value);
-                        console.error("Promise REASON : %s", _reply.reason);
-                        console.error("------------- allX PROMISE REJECTED *************");
-                    }
-
-                    return _reply.value;
-                });
-
-                //l.i("************* allX THEN result : ");
-                //l.i("\t", JSON.stringify(arrReplies));
-
-                return arrReplies;
-            });
-
-        var sonucAllX = Q.allSettled(this);
-        return sonucAllX.then(function (_sonuclar) {
-            //ssg = [{"allX.then(function(sonuclar : ": _sonuclar}];
-            return _sonuclar.map(function (_sonuc) {
-                _sonuc.value;
-            });
-        });
     };
 
     /**
@@ -532,15 +547,8 @@ function Extensions() {
         return d.promise;
     };
 
-    Date.prototype.f_addDays = function (days) {
-        var dat = new Date(this.valueOf());
-        dat.setDate(dat.getDate() + parseInt(days));
-        return dat;
-    };
-
-
     /**
-     * Örnek kullanım
+     * sumx metodunun Örnek kullanımı
      * sumX(_.pluck(value, "Fiyat"))
      * Fiyatların toplamını getirir
      * @param numbers
@@ -550,6 +558,146 @@ function Extensions() {
             return result + parseFloat(current);
         }, 0);
     };
+
+    Array.prototype.sortByFieldX = function (prop, desc) {
+        this.sort(function (a, b) {
+            if (desc)
+                return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+            else
+                return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        });
+        return this;
+    };
+
+    Array.prototype.findByFieldX = function (_fields, _q) {
+        if (_q == undefined) {
+
+            throw ("Aranan değer BOŞ geldi.");
+        }
+        var tempSource = this.slice(0);
+        var eachSource = this.slice(0);
+        var result = [];
+
+        for (var j = 0, bLastField = false; $.isArray(_fields) && j < _fields.length;) {
+            var field = _fields[j];
+
+            for (var k = 0; k < eachSource.length; k++) {
+                var o = eachSource[k];
+
+                var bEqual = false;
+                if (o && o[field] != undefined) {
+                    switch (typeof o[field]) {
+                        case 'string':
+                            if (o[field].toString().toTurkishToUpperX().indexOf(_q.toTurkishToUpperX()) >= 0) {
+                                bEqual = true;
+                            }
+                            break;
+                        case 'boolean':
+                            if (o[field] == _q) {
+                                bEqual = true;
+                            }
+                            break;
+                        case 'number':
+                            if (o[field] == parseInt(_q)) {
+                                bEqual = true;
+                            }
+                            break;
+                        default:
+                            bEqual = false;
+                            break;
+                    }
+
+                    if (bEqual) {
+                        result.push(o);
+                    }
+
+                    /* Son alanda arama yapmıyorsak diziden çıkartalım, yoksa performans kaybetmeyelim */
+                    if (!bLastField) {
+                        tempSource.splice(k, 1);
+                    }
+                }
+            }
+
+            /* Son alanda arama yapmıyorsak atama yapalım */
+            if (!bLastField) {
+                eachSource = tempSource;
+            }
+
+            bLastField = ((++j) <= _fields.length - 1);
+        }
+        return result;
+    };
+
+    Array.prototype.takeX = function (_iXAdet, _bBastan) {
+        if (typeof _bBastan == "boolean" && !_bBastan) {
+            return this.slice(this.length - _iXAdet, this.length);
+        }
+        return this.slice(0, _iXAdet);
+    };
+
+    Array.prototype.diffArrayX = function (a, b) {
+        var seen = [], diff = [];
+        for (var i = 0; i < b.length; i++) {
+            seen[b[i]] = true;
+        }
+
+        for (var i = 0; i < a.length; i++) {
+            if (!seen[a[i]]) {
+                diff.push(a[i]);
+            }
+        }
+        return diff;
+    };
+
+
+    //endregion
+
+    //region DATE
+
+    Date.prototype.f_addDays = function (days) {
+        var dat = new Date(this.valueOf());
+        dat.setDate(dat.getDate() + parseInt(days));
+        return dat;
+    };
+
+    Date.momentFormatX = function (obj, prop, format) {
+        return obj[prop] = moment(obj[prop]).format(format || "DD.MM.YYYY");
+    };
+
+    Date.prototype.momentFormatX = function (format) {
+        return moment(this).format(format || "DD.MM.YYYY");
+    };
+
+    Date.prototype.AyinBiriX = function () {
+        return new Date(this.getFullYear(), this.getMonth(), 1);
+    };
+
+    Date.prototype.AyinSonuX = function () {
+        return new Date(this.getFullYear(), this.getMonth() + 1, 0);
+    };
+
+    Date.prototype.HaftaBasiX = function () {
+        var first = this.getDate() - this.getDay(); // First day is the day of the month - the day of the week
+        return new Date(this.getFullYear(), this.getMonth(), first + 1);
+    };
+    Date.prototype.HaftaSonuX = function () {
+        var first = this.getDate() - this.getDay();
+        var last = first + 7;
+        return new Date(this.getFullYear(), this.getMonth(), last);
+    };
+
+    Date.prototype.setMonthX = function (iKacAy) {
+        var copiedDate = new Date(this.getTime());
+        var sonuc = copiedDate.setMonth(copiedDate.getMonth() + iKacAy);
+        return new Date(sonuc);
+    };
+
+    Date.nowX = function () {
+        return new Date();
+    };
+
+
+    //endregion
 
     return result;
 }
