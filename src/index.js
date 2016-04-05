@@ -227,7 +227,7 @@ function Extensions() {
      * Gelen dizinin sadece istenen prop değerlerini dizi olarak döner
      * @example
      * var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
-     * _.pluck(stooges, 'name');
+     * _.map(stooges, 'name');
      * => ["moe", "larry", "curly"]
      * @param {string} _prop
      * @returns {Array}
@@ -518,7 +518,7 @@ function Extensions() {
             .map(function (value, key) {
                 return {
                     Key: key,
-                    Count: _.size(_.pluck(value, _sayilacak))
+                    Count: _.size(_.map(value, _sayilacak))
                 }
             })
             .value();
@@ -549,7 +549,7 @@ function Extensions() {
 
     /**
      * sumx metodunun Örnek kullanımı
-     * sumX(_.pluck(value, "Fiyat"))
+     * sumX(_.map(value, "Fiyat"))
      * Fiyatların toplamını getirir
      * @param numbers
      */
