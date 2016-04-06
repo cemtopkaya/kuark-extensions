@@ -1,1 +1,4 @@
-module.exports = require("./src/index");
+// Ilgili extensions ilgili tiplere uygulansın diye require ile çalıştırıyoruz
+var sadeceCalissaYeterDiye = require("./src/index");
+
+exports.winstonConfig = require('./lib/winstonConfig');
