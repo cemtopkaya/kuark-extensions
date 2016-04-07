@@ -2,3 +2,6 @@
 var sadeceCalissaYeterDiye = require("./src/index");
 
 exports.winstonConfig = require('./lib/winstonConfig');
+
+/** @type {EMail} */
+exports.EMail = require('./lib/email');
