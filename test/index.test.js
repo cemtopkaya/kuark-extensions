@@ -1,4 +1,4 @@
-var index = require('../src/index'),
+var extensions = require('../src/index'),
     chai = require('chai'),
     expect = require('chai').expect;
 
@@ -8,17 +8,17 @@ describe('Uzantıların testi', function () {
     });
 
     it('SSG ile başarılı mesajı göstermek', function () {
-        index.ssg = [{"deneme": {i:1}}];
+        extensions.ssg = [{"deneme": {i:1}}];
         return true;
     });
 
     it('SSR ile başarılı mesajı göstermek', function () {
-        index.ssr = [{"deneme": {i:1}}];
+        extensions.ssr = [{"deneme": {i:1}}];
         return true;
     });
 
     it('__stack propertysi extension içinde tanımlı', function () {
-        return index.hasOwnProperty('__stack');
+        return extensions.hasOwnProperty('__stack');
     });
 
     it('Bugüne 1 gün ekleme', function () {

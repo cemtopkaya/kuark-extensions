@@ -703,5 +703,6 @@ function Extensions() {
 }
 
 if(!result.hasOwnProperty("__stack")){
+    console.log("****** Extensions çalıştırılacak! ******");
     Extensions();
 }
