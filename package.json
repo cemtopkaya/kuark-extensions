@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -33,7 +33,7 @@
     "build": "parallelshell 'npm run watch:test",
     "postbuild": "",
     "_______________________________________________________________ VERSION": "__________",
-    "preversion": "npm run test",
+    "preversion": "npm run mocha && ncu kuark-api kuark-batch kuark-db kuark-extensions kuark-istisna kuark-app",
     "version": "git add -A && git commit -m\"Versiyon yapılacak\"",
     "postversion": "git push && git push --tags && npm publish",
     "version:patch": "npm version patch  -m \" %s Versiyonu yapıldı\" --no-git-tag-version",
@@ -49,7 +49,7 @@
     "_______________________________________________________________ PUBLISH": "__________",
     "prepublish": "",
     "publish": "",
-    "postpublish": "npm run update:all",
+    "postpublish": "",
     "_______________________________________________________________ UPDATE KUARK PACKAGES": "__________",
     "update:all": "npm run update-kuark-api && npm run update-kuark-batch && npm run update-kuark-db && npm run update-kuark-istisna && npm run update-kuark-schema && npm run update-kuark-app",
     "update-kuark-app": "ncu /^kuark-/ -u --packageFile ../../App/package.json && cd ../../App && npm update kuark-extensions",
@@ -70,20 +70,20 @@
     "eslint": "2.5.1",
     "eslint-config-standard": "5.1.0",
     "eslint-watch": "2.1.10",
-    "json-schema-defaults": "^0.1.1",
+    "json-schema-defaults": "0.1.1",
     "mocha": "2.4.5",
     "parallelshell": "2.0.0",
-    "supertest": "^1.2.0",
+    "supertest": "1.2.0",
     "watch": "0.17.1"
   },
   "dependencies": {
     "emailjs": "^1.0.4",
-    "lodash": "^4.7.0",
-    "moment": "^2.12.0",
+    "lodash": "4.9.0",
+    "moment": "2.12.0",
     "q": "1.4.1",
     "redis": "2.5.3",
-    "winston": "^2.2.0",
-    "winston-elasticsearch": "^0.2.6",
-    "winston-redis": "^1.0.0"
+    "winston": "2.2.0",
+    "winston-elasticsearch": "0.2.6",
+    "winston-redis": "1.0.0"
   }
 }
