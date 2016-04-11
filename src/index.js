@@ -2,10 +2,14 @@ var moment = require('moment'),
     Q = require('q'),
     _ = require('lodash');
 
-var result = {};
-module.exports = result;
+var winstonConfig = require('../lib/winstonConfig');
+
+/** @type {EMail} */
+var EMail = require('../lib/email');
+
 
 function Extensions() {
+    var result = {};
 
     //region OBJECT
     Object.defineProperty(result, '__stack', {
@@ -97,6 +101,7 @@ function Extensions() {
             console.log(consoleMesaji);
         }
     });
+
 
     //endregion
 
@@ -699,10 +704,9 @@ function Extensions() {
 
     //endregion
 
+    result.EMail = EMail;
+    result.winstonConfig = winstonConfig;
     return result;
 }
 
-if(!result.hasOwnProperty("__stack")){
-    console.log("****** Extensions çalıştırılacak! ******");
-    Extensions();
-}
+module.exports = Extensions();

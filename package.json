@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -56,8 +56,8 @@
     "update-kuark-api": "ncu /^kuark-/ -u --packageFile ../kuark-api/package.json && cd ../kuark-api && npm update kuark-extensions",
     "update-kuark-batch": "ncu /^kuark-/ -u --packageFile ../kuark-batch/package.json && cd ../kuark-batch && npm update kuark-extensions",
     "update-kuark-db": "ncu /^kuark-/ -u --packageFile ../kuark-db/package.json && cd ../kuark-db && npm update kuark-extensions",
-    "update-kuark-istisna": "ncu /^kuark-/ -u --packageFile ../kuark-istisna/package.json && cd ../kuark-istisna && npm update kuark-extensions",
-    "update-kuark-schema": "ncu /^kuark-/ -u --packageFile ../kuark-schema/package.json && cd ../kuark-schema && npm update kuark-extensions"
+    "update-kuark-schema": "ncu /^kuark-/ -u --packageFile ../kuark-schema/package.json && cd ../kuark-schema && npm update kuark-extensions",
+    "update-kuark-istisna": "ncu /^kuark-/ -u --packageFile ../kuark-istisna/package.json && cd ../kuark-istisna && npm update kuark-extensions"
   },
   "repository": {
     "type": "git",
