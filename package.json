@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -35,7 +35,7 @@
     "_______________________________________________________________ VERSION": "__________",
     "preversion": "npm run mocha && ncu kuark-api kuark-batch kuark-db kuark-extensions kuark-istisna kuark-app",
     "version": "git add -A && git commit -m\"Versiyon yapılacak\"",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "git push && npm publish",
     "version:patch": "npm version patch  -m \" %s Versiyonu yapıldı\" --no-git-tag-version",
     "version:minor": "npm version minor",
     "version:major": "npm version major",
@@ -46,6 +46,7 @@
     "git:push": "git push",
     "git:AC": "npm run git:add && npm run git:commit",
     "git:ACP": "npm run git:add && npm run git:commit && npm run git:push",
+    "git:ACPT": "npm run git:add && npm run git:commit && npm run git:push && git push --tags",
     "_______________________________________________________________ PUBLISH": "__________",
     "1prepublish": "",
     "1publish": "",
