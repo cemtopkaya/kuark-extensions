@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -47,9 +47,9 @@
     "git:AC": "npm run git:add && npm run git:commit",
     "git:ACP": "npm run git:add && npm run git:commit && npm run git:push",
     "_______________________________________________________________ PUBLISH": "__________",
-    "prepublish": "",
-    "publish": "",
-    "postpublish": "",
+    "1prepublish": "",
+    "1publish": "",
+    "1postpublish": "",
     "_______________________________________________________________ UPDATE KUARK PACKAGES": "__________",
     "update:all": "npm run update-kuark-api && npm run update-kuark-batch && npm run update-kuark-db && npm run update-kuark-istisna && npm run update-kuark-schema && npm run update-kuark-app",
     "update-kuark-app": "ncu /^kuark-/ -u --packageFile ../../App/package.json && cd ../../App && npm update kuark-extensions",
