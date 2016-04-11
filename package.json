@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
