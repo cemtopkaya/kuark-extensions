@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -33,7 +33,7 @@
     "build": "parallelshell 'npm run watch:test",
     "postbuild": "",
     "_______________________________________________________________ VERSION": "__________",
-    "preversion": "npm run mocha && ncu kuark-api kuark-batch kuark-db kuark-extensions kuark-istisna kuark-app",
+    "preversion": "npm run mocha",
     "version": "git add -A && git commit -m\"Versiyon yapılacak\"",
     "postversion": "git push && npm publish",
     "version:patch": "npm version patch  -m \" %s Versiyonu yapıldı\" --no-git-tag-version",
@@ -50,15 +50,14 @@
     "_______________________________________________________________ PUBLISH": "__________",
     "1prepublish": "",
     "1publish": "",
-    "1postpublish": "",
+    "postpublish": "npm run update:all:packagejson",
     "_______________________________________________________________ UPDATE KUARK PACKAGES": "__________",
-    "update:all": "npm run update-kuark-api && npm run update-kuark-batch && npm run update-kuark-db && npm run update-kuark-istisna && npm run update-kuark-schema && npm run update-kuark-app",
-    "update-kuark-app": "ncu /^kuark-/ -u --packageFile ../../App/package.json && cd ../../App && npm update kuark-extensions",
-    "update-kuark-api": "ncu /^kuark-/ -u --packageFile ../kuark-api/package.json && cd ../kuark-api && npm update kuark-extensions",
-    "update-kuark-batch": "ncu /^kuark-/ -u --packageFile ../kuark-batch/package.json && cd ../kuark-batch && npm update kuark-extensions",
-    "update-kuark-db": "ncu /^kuark-/ -u --packageFile ../kuark-db/package.json && cd ../kuark-db && npm update kuark-extensions",
-    "update-kuark-schema": "ncu /^kuark-/ -u --packageFile ../kuark-schema/package.json && cd ../kuark-schema && npm update kuark-extensions",
-    "update-kuark-istisna": "ncu /^kuark-/ -u --packageFile ../kuark-istisna/package.json && cd ../kuark-istisna && npm update kuark-extensions"
+    "update:all:packagejson": "npm run ncu:app && npm run ncu:api && npm run ncu:batch && npm run ncu:db",
+    "ncu:app": "ncu /^kuark-/ -u --packageFile ../../App/package.json",
+    "ncu:api": "ncu /^kuark-/ -u --packageFile ../kuark-api/package.json",
+    "ncu:batch": "ncu /^kuark-/ -u --packageFile ../kuark-batch/package.json",
+    "ncu:db": "ncu /^kuark-/ -u --packageFile ../kuark-db/package.json",
+    "u:all": "npm update kuark-api kuark-batch kuark-db kuark-extensions kuark-istisna kuark-app"
   },
   "repository": {
     "type": "git",
