@@ -1,6 +1,6 @@
 {
   "name": "kuark-extensions",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "Kuark application's extensions",
   "main": "index.js",
   "directories": {
@@ -53,11 +53,11 @@
     "postpublish": "npm run update:all:packagejson",
     "_______________________________________________________________ UPDATE KUARK PACKAGES": "__________",
     "update:all:packagejson": "npm run ncu:app && npm run ncu:api && npm run ncu:batch && npm run ncu:db",
-    "ncu:app": "ncu /^kuark-/ -u --packageFile ../../App/package.json",
-    "ncu:api": "ncu /^kuark-/ -u --packageFile ../kuark-api/package.json",
-    "ncu:batch": "ncu /^kuark-/ -u --packageFile ../kuark-batch/package.json",
-    "ncu:db": "ncu /^kuark-/ -u --packageFile ../kuark-db/package.json",
-    "u:all": "npm update kuark-api kuark-batch kuark-db kuark-extensions kuark-istisna kuark-app"
+    "ncu:app": "ncu kuark-extensions -u --packageFile ../../App/package.json",
+    "ncu:api": "ncu kuark-extensions -u --packageFile ../kuark-api/package.json",
+    "ncu:batch": "ncu kuark-extensions -u --packageFile ../kuark-batch/package.json",
+    "ncu:db": "ncu kuark-extensions -u --packageFile ../kuark-db/package.json",
+    "u:all": "echo Güncellenecek bir kuark paketi yüklü değil!"
   },
   "repository": {
     "type": "git",
