@@ -1,5 +1,6 @@
 var moment = require('moment'),
     Q = require('q'),
+    util = require('util'),
     _ = require('lodash');
 
 var winstonConfig = require('../lib/winstonConfig');
@@ -82,12 +83,10 @@ function Extensions() {
                     "Line": result.__stack[1].getLineNumber()
                 },
                 esMesaji = "http://127.0.0.1:9200/logs-" + moment().format("YYYY.MM.DD") + "/_search/?size=1000&q=message:" + simdi,
-            /*ozet = "Function: " + __stack[1].getFunctionName() +
-             "\nFile\t: " + __stack[1].getFileName().split('/').slice(-1)[0] +
-             "\nLine\t: " + __stack[1].getLineNumber() + "\n" +
-             "\n Param\t: " + JSON.stringify(arguments, null, 2),*/
-                sArguments = JSON.stringify(arguments, null, 2);
+                sArguments = '',
+                utilArgs = util.inspect(arguments, {showHidden: true, depth: null});
 
+            sArguments = JSON.stringify(utilArgs, null, 2);
 
             if (sArguments.length < 200) {
                 meta1.Param = arguments;
